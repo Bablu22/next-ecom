@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
+import Notification from "./components/Notification/Notification";
+import AuthSession from "./components/Auth/AuthSession";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <AuthSession>
+      <html lang="en">
+        <body className={inter.className}>
+          <Notification />
+          <NextTopLoader showSpinner={false} />
+          {children}
+        </body>
+      </html>
+    </AuthSession>
   );
 }
